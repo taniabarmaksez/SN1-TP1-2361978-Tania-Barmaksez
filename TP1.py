@@ -36,30 +36,33 @@ def racine_chiffre_par_chiffre(nombre):
 print(racine_chiffre_par_chiffre(8))
 
 # methode 2 dichotomie
-def racine_dichotomie(nombre):
-    precision_decimal = 0.000001
-    if nombre < 0:
+def racine_dichotomie(n, precision_decimales=6):
+    if n < 0 :
         raise ValueError("nombre negatif")
-    if nombre == 0:
+    if n == 0:
         return 0.0
 
-    # Déterminer l'intervalle initial
-    if nombre >= 1:  # Si nombre ≥ 1 : intervalle initial = [0, nombre]
-        bas = 0
-        haut = nombre
-    else:  # Si 0 < nombre < 1 : intervalle initial = [nombre, 1]
-        bas = nombre
-        haut = 1
+    # Intervalle initial
+    bas, haut = (0, n) if n >= 1 else (n, 1)
+    precision = 10 ** (-precision_decimales)
+    i = 0
 
-    # Réduction de l'intervalle de moitié
-    while (haut - bas) > precision_decimal:
+    # Boucle principale
+    while (haut - bas) > precision:
+        i += 1
         milieu = (bas + haut) / 2
-        if milieu ** 2 < nombre:
+
+        # Affichage des bornes à chaque étape
+        print(f"la boucle {i} : bas = {bas:.6f}, haut = {haut:.6f}, milieu = {milieu:.6f}")
+
+        if milieu ** 2 < n:
             bas = milieu
         else:
             haut = milieu
 
-    resultat = (bas + haut) / 2
-    return resultat
+    racine = (bas + haut) / 2
+    return round(racine, precision_decimales)
 
-print(racine_dichotomie(8))
+
+resultat = racine_dichotomie(8)
+print(f"\nRésultat final {resultat}")
