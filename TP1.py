@@ -66,3 +66,22 @@ def racine_dichotomie(n, precision_decimales=6):
 
 resultat = racine_dichotomie(8)
 print(f"\nRésultat final {resultat}")
+
+#comparaison des performances
+def comparaison_performances():
+    nombre_appels = 100 000
+    nombre_aleatoire = (random.randint(10, 100 000) for _ in range(nombre_appels))
+
+    resultat = {}
+
+# test méthode 1
+debut = time.monotonic_ns()
+for nombre in nombres_aleatoire :
+    racine_chiffre_par_chiffre(nombre)
+fin = time.monotonic_ns()
+temps_total1 = fin - debut
+temps_moyen1 = (fin - debut) / nombre_appels
+
+
+
+
