@@ -68,20 +68,39 @@ resultat = racine_dichotomie(8)
 print(f"\nRésultat final {resultat}")
 
 #comparaison des performances
-def comparaison_performances():
-    nombre_appels = 100 000
-    nombre_aleatoire = (random.randint(10, 100 000) for _ in range(nombre_appels))
 
-    resultat = {}
+nombre_appels= 100000
+nombre_aleatoire = (random.randint(10, 100000) for _ in range(nombre_appels))
 
 # test méthode 1
 debut = time.monotonic_ns()
-for nombre in nombres_aleatoire :
+for nombre in nombre_aleatoire :
     racine_chiffre_par_chiffre(nombre)
 fin = time.monotonic_ns()
 temps_total1 = fin - debut
 temps_moyen1 = (fin - debut) / nombre_appels
 
+# test méthode 2
+debut = time.monotonic_ns()
+for nombre in nombre_aleatoire :
+    racine_dichotomie(nombre)
+fin = time.monotonic_ns()
+temps_total2 = fin - debut
+temps_moyen2 = (fin - debut)/ nombre_appels
 
 
 
+# test méthode 3 math.sqrt
+debut = time.monotonic_ns()
+for nombre in nombre_aleatoire :
+    math.sqrt(nombre)
+fin = time.monotonic_ns()
+temps_total3= fin - debut
+temps_moyen3 = (fin - debut) / nombre_appels
+
+
+
+print("Résultats des performances :")
+print(f" Méthode 1 (chiffre par chiffre) : Temps total = {temps_total1:2f} ms, Temps moyen = {temps_moyen1:5f} ms")
+print(f" Méthode 2 (dichotomie) : Temps total = {temps_total2:2f} ms , Temps moyen =  {temps_moyen2:5f} ms")
+print(f" Méthode 3 (math.sqrt) : Temps total = {temps_total3:2f} ms , Temps moyen= {temps_moyen3:5f} ms ")
